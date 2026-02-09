@@ -40,8 +40,10 @@ QtWebEngineTransfer::QtWebEngineTransfer(QWebEngineDownloadX *item, TransferOpti
 
 	markAsStarted();
 
-	connect(m_item, &QWebEngineDownloadX::finished, this, &QtWebEngineTransfer::markAsFinished);
-	connect(m_item, &QWebEngineDownloadX::downloadProgress, this, &QtWebEngineTransfer::handleDownloadProgress);
+	connect(m_item, &QWebEngineDownloadX::isFinished, this, &QtWebEngineTransfer::markAsFinished);
+	/* qt6: cannot take the address of an rvalue of type 'QWebEngineDownloadRequest::DownloadState'
+	connect(m_item, &QWebEngineDownloadX::DownloadInProgress, this, &QtWebEngineTransfer::handleDownloadProgress);
+	*/
 	connect(m_item, &QWebEngineDownloadX::stateChanged, this, [&](QWebEngineDownloadX::DownloadState state)
 	{
 		switch (state)
