@@ -40,8 +40,10 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QDrag>
 #include <QtWidgets/QFileIconProvider>
+#if USE_QT5
 #include <QtWinExtras/QWinJumpList>
 #include <QtWinExtras/QWinJumpListCategory>
+#endif
 
 #define REGISTRATION_IDENTIFIER "OtterBrowser"
 

@@ -25,9 +25,11 @@
 
 #include <QtCore/QProcessEnvironment>
 #include <QtCore/QSettings>
+#if USE_QT5
 #include <QtWinExtras/QtWin>
 #include <QtWinExtras/QWinTaskbarButton>
 #include <QtWinExtras/QWinTaskbarProgress>
+#endif
 
 #ifndef NOMINMAX // VC++ fix - http://qt-project.org/forums/viewthread/22133
 #define NOMINMAX
