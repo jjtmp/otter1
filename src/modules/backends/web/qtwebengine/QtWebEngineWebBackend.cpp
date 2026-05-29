@@ -37,8 +37,10 @@
 #include <QtCore/QRegularExpression>
 #if QT_VERSION >= 0x060000
 #include <QtWebEngineCore/QWebEngineSettings>
+#define QWebEngineDownloadX QWebEngineDownloadRequest
 #else
 #include <QtWebEngineWidgets/QWebEngineSettings>
+#define QWebEngineDownloadX QWebEngineDownloadItem
 #endif
 
 namespace Otter
@@ -60,9 +62,9 @@ QtWebEngineWebBackend::QtWebEngineWebBackend(QObject *parent) : WebBackend(paren
 	qputenv("QTWEBENGINE_DICTIONARIES_PATH", SpellCheckManager::getDictionariesPath().toLatin1());
 }
 
-void QtWebEngineWebBackend::handleDownloadRequested(QWebEngineDownloadRequest *item)
+void QtWebEngineWebBackend::handleDownloadRequested(QWebEngineDownloadX *item)
 {
-	if (item->savePageFormat() != QWebEngineDownloadRequest::UnknownSaveFormat)
+	if (item->savePageFormat() != QWebEngineDownloadX::UnknownSaveFormat)
 	{
 		return;
 	}

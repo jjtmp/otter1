@@ -66,6 +66,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QVBoxLayout>
 
+
+#if QT_VERSION >= 0x060000
+#define QWebEngineDownloadX QWebEngineDownloadRequest
+#else // -> Qt5
+#define QWebEngineDownloadX QWebEngineDownloadItem
+#endif
+
 namespace Otter
 {
 
@@ -243,7 +250,7 @@ void QtWebEngineWebWidget::triggerAction(int identifier, const QVariantMap &para
 
 				if (information.canSave)
 				{
-					m_page->save(information.path, QWebEngineDownloadRequest::SingleHtmlSaveFormat);
+					m_page->save(information.path, QWebEngineDownloadX::SingleHtmlSaveFormat);
 				}
 			}
 			else
@@ -256,11 +263,11 @@ void QtWebEngineWebWidget::triggerAction(int identifier, const QVariantMap &para
 					switch (format)
 					{
 						case CompletePageSaveFormat:
-							m_page->save(path, QWebEngineDownloadRequest::CompleteHtmlSaveFormat);
+							m_page->save(path, QWebEngineDownloadX::CompleteHtmlSaveFormat);
 
 							break;
 						case MhtmlSaveFormat:
-							m_page->save(path, QWebEngineDownloadRequest::MimeHtmlSaveFormat);
+							m_page->save(path, QWebEngineDownloadX::MimeHtmlSaveFormat);
 
 							break;
 						case PdfSaveFormat:
@@ -268,7 +275,7 @@ void QtWebEngineWebWidget::triggerAction(int identifier, const QVariantMap &para
 
 							break;
 						default:
-							m_page->save(path, QWebEngineDownloadRequest::SingleHtmlSaveFormat);
+							m_page->save(path, QWebEngineDownloadX::SingleHtmlSaveFormat);
 
 							break;
 					}
