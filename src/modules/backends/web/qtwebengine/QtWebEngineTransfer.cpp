@@ -25,8 +25,10 @@
 
 #if QT_VERSION >= 0x060000
 #define QWebEngineDownloadX QWebEngineDownloadRequest
+#define xDlProgress DownloadInProgress
 #else
 #define QWebEngineDownloadX QWebEngineDownloadItem
+#define xDlProgress downloadProgress
 #endif
 
 namespace Otter
@@ -41,9 +43,11 @@ QtWebEngineTransfer::QtWebEngineTransfer(QWebEngineDownloadX *item, TransferOpti
 	markAsStarted();
 
 	connect(m_item, &QWebEngineDownloadX::isFinished, this, &QtWebEngineTransfer::markAsFinished);
-	/* qt6: cannot take the address of an rvalue of type 'QWebEngineDownloadRequest::DownloadState'
-	connect(m_item, &QWebEngineDownloadX::DownloadInProgress, this, &QtWebEngineTransfer::handleDownloadProgress);
-	*/
+#if QT_VERSION < 0x060000
+	connect(m_item, &QWebEngineDownloadX::xDlProgress, this, &QtWebEngineTransfer::handleDownloadProgress);
+#else
+    // Cannot take the address of an rvalue of type 'QWebEngineDownloadRequest::DownloadState'
+#endif
 	connect(m_item, &QWebEngineDownloadX::stateChanged, this, [&](QWebEngineDownloadX::DownloadState state)
 	{
 		switch (state)
