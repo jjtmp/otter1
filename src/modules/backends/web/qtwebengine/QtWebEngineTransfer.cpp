@@ -23,13 +23,6 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QMimeDatabase>
 
-#if QT_VERSION >= 0x060000
-#define QWebEngineDownloadX QWebEngineDownloadRequest
-#define xDlProgress DownloadInProgress
-#else
-#define QWebEngineDownloadX QWebEngineDownloadItem
-#define xDlProgress downloadProgress
-#endif
 
 namespace Otter
 {

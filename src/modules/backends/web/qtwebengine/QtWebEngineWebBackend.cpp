@@ -37,10 +37,8 @@
 #include <QtCore/QRegularExpression>
 #if QT_VERSION >= 0x060000
 #include <QtWebEngineCore/QWebEngineSettings>
-#define QWebEngineDownloadX QWebEngineDownloadRequest
 #else
 #include <QtWebEngineWidgets/QWebEngineSettings>
-#define QWebEngineDownloadX QWebEngineDownloadItem
 #endif
 
 namespace Otter

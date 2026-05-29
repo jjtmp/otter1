@@ -24,8 +24,12 @@
 
 #if QT_VERSION >= 0x060000
 #include <QtWebEngineCore/QWebEngineDownloadRequest>
+#define QWebEngineDownloadX QWebEngineDownloadRequest
+#define xDlProgress DownloadInProgress
 #else
 #include <QtWebEngineWidgets/QWebEngineDownloadItem>
+#define QWebEngineDownloadX QWebEngineDownloadItem
+#define xDlProgress downloadProgress
 #endif
 
 namespace Otter
@@ -36,7 +40,7 @@ class QtWebEngineTransfer final : public Transfer
 	Q_OBJECT
 
 public:
-	explicit QtWebEngineTransfer(QWebEngineDownloadRequest *item, TransferOptions options = CanAskForPathOption, QObject *parent = nullptr);
+	explicit QtWebEngineTransfer(QWebEngineDownloadX *item, TransferOptions options = CanAskForPathOption, QObject *parent = nullptr);
 
 	QUrl getSource() const override;
 	QString getSuggestedFileName() override;
@@ -52,7 +56,7 @@ public slots:
 
 private:
 #if QT_VERSION >= 0x060000
-	QPointer<QWebEngineDownloadRequest> m_item;
+	QPointer<QWebEngineDownloadX> m_item;
 #else
 	QPointer<QWebEngineDownloadItem> m_item;
 #endif

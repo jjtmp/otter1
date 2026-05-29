@@ -67,12 +67,6 @@
 #include <QtWidgets/QVBoxLayout>
 
 
-#if QT_VERSION >= 0x060000
-#define QWebEngineDownloadX QWebEngineDownloadRequest
-#else // -> Qt5
-#define QWebEngineDownloadX QWebEngineDownloadItem
-#endif
-
 namespace Otter
 {
 
