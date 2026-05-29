@@ -77,7 +77,11 @@ else ()
 	set(QT_VERSION Qt6)
 	set(QT_MINIMUM_VERSION 6.2)
 	set(QT_NO_FIND_QMLSC ON)
-	find_package(Qt6 REQUIRED COMPONENTS Core5Compat NetworkPrivate)
+	find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
+	find_package(Qt6 QUIET COMPONENTS NetworkPrivate)
+	set_package_properties(Qt6NetworkPrivate PROPERTIES DESCRIPTION
+		"required, but sometimes cmake cannot find it even when installed")
+		# Applies to 6.8.2 on Debian, may be fixed in 6.9/on other distributions
 endif ()
 
 find_package(${QT_VERSION} ${QT_MINIMUM_VERSION} REQUIRED COMPONENTS Core Gui Multimedia Network PrintSupport Qml Svg Widgets Xml)
