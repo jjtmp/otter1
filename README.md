@@ -41,6 +41,8 @@ Otter Browser is *your* browser. Because it is free software (GPL v3), you can c
 
 The browser is written primarily in C++ and leverages powerful features offered by the Qt framework.
 
+Qt6 compilation is possible, yet the resulting browser not fully functional (e. g. favicons not showing, etc.)
+
 We also use JavaScript for interacting with rendering engines (when native APIs are not available) and Python 3 is our preferred language for creating tools to ease development.
 
 Have a look at the [open issues](https://github.com/OtterBrowser/otter-browser/issues) to find a mission that resonates with you.
