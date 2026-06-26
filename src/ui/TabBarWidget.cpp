@@ -1,5 +1,6 @@
 /**************************************************************************
 * Otter Browser: Web browser controlled by the user, not vice-versa.
+* Copyright (C) 2026 Jonas Bechtel
 * Copyright (C) 2013 - 2025 Michal Dutkiewicz aka Emdek <michal@emdek.pl>
 * Copyright (C) 2014 Piotr Wójcik <chocimier@tlen.pl>
 *
@@ -1674,7 +1675,13 @@ QSize TabBarWidget::tabSizeHint(int index) const
 	if (isHorizontal())
 	{
 		const Window *window(getWindow(index));
-		const int tabHeight(qBound(m_minimumTabSize.height(), qMax((m_areThumbnailsEnabled ? 200 : 0), (parentWidget() ? parentWidget()->height() : height())), m_maximumTabSize.height()));
+
+		int tabHeight = parentWidget() ? parentWidget()->height() : height();
+		tabHeight = qMax(tabHeight, m_areThumbnailsEnabled ? 200 : 0);
+		if (m_minimumTabSize.height() > 0)
+			tabHeight = qMax(tabHeight, m_minimumTabSize.height());
+		if (m_maximumTabSize.height() > 0)
+			tabHeight = qMin(tabHeight, m_maximumTabSize.height());
 
 		if (window && window->isPinned())
 		{
@@ -1686,7 +1693,13 @@ QSize TabBarWidget::tabSizeHint(int index) const
 			return {m_tabWidth, tabHeight};
 		}
 
-		return {qBound(m_minimumTabSize.width(), qFloor((rect().width() - (m_pinnedTabsAmount * m_minimumTabSize.width())) / qMax(1, (count() - m_pinnedTabsAmount))), m_maximumTabSize.width()), tabHeight};
+		int tabWidth = qFloor((rect().width() - (m_pinnedTabsAmount * m_minimumTabSize.width())) / qMax(1, (count() - m_pinnedTabsAmount)));
+		if (m_minimumTabSize.width() > 0)
+			tabWidth = qMax(tabWidth, m_minimumTabSize.width());
+		if (m_maximumTabSize.width() > 0)
+			tabWidth = qMin(tabWidth, m_maximumTabSize.width());
+
+		return {tabWidth, tabHeight};
 	}
 
 	return {m_maximumTabSize.width(), (m_areThumbnailsEnabled ? 200 : m_minimumTabSize.height())};
