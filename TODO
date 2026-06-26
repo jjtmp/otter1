@@ -18,4 +18,5 @@ Later / unspecified:
 - BitTorrent module
 - Search over website content (currently open + history)
 - Custom note/bookmark pages [maybe new-tab with more flexible layout]
+- Ctrl-C and copy menues shall export to both clipboards on X11
 
