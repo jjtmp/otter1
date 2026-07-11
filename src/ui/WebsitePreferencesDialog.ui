@@ -514,7 +514,7 @@
          </item>
         </layout>
        </item>
-       <item row="9" column="1">
+       <item row="10" column="1">
         <spacer name="scriptingHorizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -692,7 +692,7 @@
          </item>
         </layout>
        </item>
-       <item row="10" column="1">
+       <item row="11" column="1">
         <spacer name="scriptingSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -731,6 +731,40 @@
            </property>
            <property name="buddy">
             <cstring>enableFullScreenComboBox</cstring>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="9" column="0" alignment="Qt::AlignHCenter">
+        <widget class="QCheckBox" name="usePolyfillOverrideCheckBox">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <layout class="QHBoxLayout" name="usePolyfillLayout">
+         <item>
+          <spacer name="usePolyfillSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>0</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="usePolyfillCheckBox">
+           <property name="text">
+           <string>Load polyfill from internal resources</string>
            </property>
           </widget>
          </item>

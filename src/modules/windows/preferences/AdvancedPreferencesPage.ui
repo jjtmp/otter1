@@ -999,6 +999,13 @@
               </item>
              </layout>
             </item>
+            <item>
+             <widget class="QCheckBox" name="scriptsUsePolyfill">
+              <property name="text">
+               <string>Load polyfill from internal resources</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
