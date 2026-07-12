@@ -24,8 +24,16 @@
 #include "../../../../core/WebBackend.h"
 
 #include <QtWebEngineCore/QWebEngineNotification>
+#if QT_VERSION >= 0x060000
+#include <QtWebEngineCore/QWebEngineDownloadRequest>
+#include <QtWebEngineCore/QWebEngineProfile>
+#define QWebEngineDownloadX QWebEngineDownloadRequest
+#endif
+#if QT_VERSION < 0x060000
 #include <QtWebEngineWidgets/QWebEngineDownloadItem>
 #include <QtWebEngineWidgets/QWebEngineProfile>
+#define QWebEngineDownloadX QWebEngineDownloadItem
+#endif
 
 #include <memory>
 
@@ -59,7 +67,11 @@ protected:
 	static void showNotification(std::unique_ptr<QWebEngineNotification> nativeNotification);
 
 protected slots:
+#if QT_VERSION >= 0x060000
+	void handleDownloadRequested(QWebEngineDownloadRequest *item);
+#else
 	void handleDownloadRequested(QWebEngineDownloadItem *item);
+#endif
 	void handleOptionChanged(int identifier);
 
 private:
